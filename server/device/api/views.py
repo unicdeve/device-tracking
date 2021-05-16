@@ -7,13 +7,16 @@ from .serializers import (
 )
 
 
-class DeviceView(mixins.CreateModelMixin, mixins.ListModelMixin, mixins.DestroyModelMixin, viewsets.GenericViewSet):
+class DeviceView(mixins.CreateModelMixin, mixins.ListModelMixin, mixins.DestroyModelMixin, mixins.UpdateModelMixin, viewsets.GenericViewSet):
     """
     create:
     Create a new device
 
     list:
     List all device
+
+    delete:
+    Delete a device by ID
     """
 
     # TODO: manage all payment process in the backend
