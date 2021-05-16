@@ -1,11 +1,8 @@
 import { useState } from 'react';
 import axios from 'axios';
-import { useData } from '../contexts/data';
 
 const useToggleChecked = () => {
 	const [loading, setLoading] = useState(false);
-
-	const { setData } = useData();
 
 	function toggleChecked(checked, id) {
 		setLoading(true);
@@ -14,7 +11,7 @@ const useToggleChecked = () => {
 				is_checked_out: checked,
 			})
 			.then((res) => {
-				setData((data) => [res.data, ...data]);
+				setLoading(false);
 			})
 			.catch((error) => {
 				setLoading(false);
