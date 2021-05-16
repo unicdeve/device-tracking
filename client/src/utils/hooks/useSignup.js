@@ -19,7 +19,7 @@ const useSignup = () => {
 		submitForm
 	);
 
-	const { setScreen } = useData();
+	const { setScreen, setCurrentUser } = useData();
 
 	function submitForm() {
 		const { isValid, errors } = validateSignupData(values);
@@ -29,11 +29,12 @@ const useSignup = () => {
 			axios
 				.post(`http://127.0.0.1:8000/account/`, values)
 				.then((res) => {
-					const token = res.data.token;
-					if (token) {
-						localStorage.setItem('token', JSON.stringify(token));
-						setAuthToken(token);
+					const user = res.data;
+					if (user.token) {
+						setCurrentUser(user);
+						localStorage.setItem('user', JSON.stringify(user));
 						setLoading(false);
+						setAuthToken(user.token);
 
 						setScreen('home');
 					}

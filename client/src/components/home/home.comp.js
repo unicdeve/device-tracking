@@ -3,7 +3,7 @@ import { useData } from '../../utils/contexts/data';
 import { StyledHome } from './home.styled';
 
 export default function Home() {
-	const { data, dataLoading } = useData();
+	const { data, dataLoading, currentUser } = useData();
 
 	console.log(data);
 
@@ -13,7 +13,14 @@ export default function Home() {
 				<p>Loading devices ...</p>
 			) : (
 				data.map((d) => {
-					const { id, device, manufacturer, is_checked_out, os } = d;
+					const {
+						id,
+						device,
+						manufacturer,
+						is_checked_out,
+						os,
+						last_checked_out_by,
+					} = d;
 					return (
 						<div key={id} className='device'>
 							<div className='content'>
@@ -23,9 +30,11 @@ export default function Home() {
 								<p>Is checked out? {is_checked_out.toString()}</p>
 							</div>
 
-							<div className='actions'>
-								<button>del</button>
-							</div>
+							{last_checked_out_by === currentUser.user_id ? (
+								<div className='actions'>
+									<button>del</button>
+								</div>
+							) : null}
 						</div>
 					);
 				})

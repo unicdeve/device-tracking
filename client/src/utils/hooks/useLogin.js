@@ -18,7 +18,7 @@ const useLogin = () => {
 		submitForm
 	);
 
-	const { setScreen } = useData();
+	const { setScreen, setCurrentUser } = useData();
 
 	function submitForm() {
 		const { isValid, errors } = validateLoginData(values);
@@ -28,11 +28,12 @@ const useLogin = () => {
 			axios
 				.post(`http://127.0.0.1:8000/account/login/`, values)
 				.then((res) => {
-					const token = res.data.token;
-					if (token) {
-						localStorage.setItem('token', JSON.stringify(token));
+					const user = res.data;
+					if (user.token) {
+						setCurrentUser(user);
+						localStorage.setItem('user', JSON.stringify(user));
 						setLoading(false);
-						setAuthToken(token);
+						setAuthToken(user.token);
 
 						setScreen('home');
 					}

@@ -4,6 +4,7 @@ import React, {
 	createContext,
 	useMemo,
 	useContext,
+	useRef,
 } from 'react';
 import axios from 'axios';
 
@@ -12,18 +13,21 @@ const DataContext = createContext();
 
 function DataProvider(props) {
 	const [screen, setScreen] = useState('auth');
+	const [currentUser, setCurrentUser] = useState({});
 	const [loading, setLoading] = useState(false);
 	const [data, setData] = useState([]);
 
-	let token = '';
-	if (localStorage.token) {
-		token = JSON.parse(localStorage.getItem('token'));
+	let userRef = useRef({});
+	if (localStorage.user) {
+		userRef.current = JSON.parse(localStorage.getItem('user'));
 	}
 
 	useEffect(() => {
-		if (token) setScreen('home');
-		else setScreen('auth');
-	}, [token]);
+		if (userRef.current.token) {
+			setCurrentUser(userRef.current);
+			setScreen('home');
+		} else setScreen('auth');
+	}, []);
 
 	useEffect(() => {
 		axios
@@ -43,9 +47,11 @@ function DataProvider(props) {
 			screen,
 			setScreen,
 			data,
+			currentUser,
+			setCurrentUser,
 			dataLoading: loading,
 		};
-	}, [screen, data, loading]);
+	}, [screen, data, loading, currentUser]);
 
 	return <DataContext.Provider value={value} {...props} />;
 }
