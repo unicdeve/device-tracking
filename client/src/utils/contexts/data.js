@@ -47,6 +47,7 @@ function DataProvider(props) {
 			screen,
 			setScreen,
 			data,
+			setData,
 			currentUser,
 			setCurrentUser,
 			dataLoading: loading,

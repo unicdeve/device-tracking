@@ -1,5 +1,6 @@
 import React from 'react';
 import { useData } from '../../utils/contexts/data';
+import CreateDeviceForm from '../create-device/create-device.comp';
 import { StyledHome } from './home.styled';
 
 export default function Home() {
@@ -9,6 +10,8 @@ export default function Home() {
 
 	return (
 		<StyledHome>
+			<CreateDeviceForm />
+
 			{dataLoading ? (
 				<p>Loading devices ...</p>
 			) : (
