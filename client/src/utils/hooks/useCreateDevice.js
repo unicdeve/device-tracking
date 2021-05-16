@@ -33,6 +33,7 @@ const useCreateDevice = () => {
 					setData((data) => [res.data, ...data]);
 					setValues(initialValues);
 					setChecked(false);
+					setLoading(false);
 				})
 				.catch((error) => {
 					setLoading(false);

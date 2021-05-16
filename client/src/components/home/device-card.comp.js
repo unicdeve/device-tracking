@@ -6,7 +6,7 @@ export default function DeviceCard({ data, currentUser }) {
 	const { id, device, manufacturer, is_checked_out, os, last_checked_out_by } =
 		data;
 
-	const { toggleChecked, loading } = useToggleChecked();
+	const { toggleChecked, loading, deleteDevice } = useToggleChecked();
 
 	return (
 		<>
@@ -29,7 +29,7 @@ export default function DeviceCard({ data, currentUser }) {
 
 			{last_checked_out_by === currentUser.user_id ? (
 				<div className='actions'>
-					<button>del</button>
+					<button onClick={() => deleteDevice(id)}>del</button>
 				</div>
 			) : null}
 
