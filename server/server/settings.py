@@ -38,6 +38,7 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     # custom apps
+    "account.apps.AccountConfig",
     "device.apps.DeviceConfig",
 
     # third-party libs
@@ -124,6 +125,8 @@ USE_L10N = True
 
 USE_TZ = True
 
+# default user model
+AUTH_USER_MODEL = "account.User"
 
 
 # Static files (CSS, JavaScript, Images)
