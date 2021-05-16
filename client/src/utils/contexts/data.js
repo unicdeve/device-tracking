@@ -8,6 +8,7 @@ import React, {
 } from 'react';
 import axios from 'axios';
 import setAuthToken from '../setAuthToken';
+import config from '../../config';
 
 // Context
 const DataContext = createContext();
@@ -33,7 +34,7 @@ function DataProvider(props) {
 
 	useEffect(() => {
 		axios
-			.get(`http://127.0.0.1:8000/device/`)
+			.get(`${config.API_URL}/device/`)
 			.then((res) => {
 				const data = res.data;
 				setData(data);

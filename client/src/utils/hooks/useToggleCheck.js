@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import axios from 'axios';
 import { useData } from '../contexts/data';
+import config from '../../config';
 
 const useToggleChecked = () => {
 	const [loading, setLoading] = useState(false);
@@ -10,7 +11,7 @@ const useToggleChecked = () => {
 	function toggleChecked(checked, id) {
 		setLoading(true);
 		axios
-			.patch(`http://127.0.0.1:8000/device/${id}/`, {
+			.patch(`${config.API_URL}/device/${id}/`, {
 				is_checked_out: checked,
 			})
 			.then((res) => {
@@ -25,7 +26,7 @@ const useToggleChecked = () => {
 	function deleteDevice(id) {
 		setLoading(true);
 		axios
-			.delete(`http://127.0.0.1:8000/device/${id}/`)
+			.delete(`${config.API_URL}/device/${id}/`)
 			.then((res) => {
 				setLoading(false);
 				setData((data) => {

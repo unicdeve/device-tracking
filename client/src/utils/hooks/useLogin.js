@@ -4,6 +4,7 @@ import useForm from '../../utils/hooks/useForm';
 import { validateLoginData } from '../validations/login.validation';
 import setAuthToken from '../setAuthToken';
 import { useData } from '../contexts/data';
+import config from '../../config';
 
 const initialValues = {
 	email: '',
@@ -26,7 +27,7 @@ const useLogin = () => {
 		else {
 			setLoading(true);
 			axios
-				.post(`http://127.0.0.1:8000/account/login/`, values)
+				.post(`${config.API_URL}/account/login/`, values)
 				.then((res) => {
 					const user = res.data;
 					if (user.token) {

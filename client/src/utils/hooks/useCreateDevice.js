@@ -3,6 +3,7 @@ import axios from 'axios';
 import useForm from './useForm';
 import { useData } from '../contexts/data';
 import { validateDeviceData } from '../validations/device.validation';
+import config from '../../config';
 
 const initialValues = {
 	os: '',
@@ -25,7 +26,7 @@ const useCreateDevice = () => {
 		else {
 			setLoading(true);
 			axios
-				.post(`http://127.0.0.1:8000/device/`, {
+				.post(`${config.API_URL}/device/`, {
 					...values,
 					is_checked_out: checked,
 				})
