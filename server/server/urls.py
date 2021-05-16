@@ -14,6 +14,7 @@ urlpatterns = [
     path("", schema_view),
     path("admin/", admin.site.urls),
     path("api-auth/", include("rest_framework.urls", namespace="rest_framework")),
+    path("device/", include("device.api.urls")),
 ]
 
 if settings.DEBUG:
