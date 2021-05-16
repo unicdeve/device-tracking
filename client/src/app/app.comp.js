@@ -1,10 +1,11 @@
 import React from 'react';
+import Auth from '../components/auth/auth.comp';
 import { Container } from './app.styled';
 
 function App() {
 	return (
 		<Container>
-			<h1>Home</h1>
+			<Auth />
 		</Container>
 	);
 }

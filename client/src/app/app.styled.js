@@ -6,5 +6,13 @@ export const Container = styled.div`
 	display: flex;
 	flex-direction: column;
 	align-items: center;
-	justify-content: center;
+	margin: 0 auto;
+
+	@media (min-width: 768px) {
+		width: 50%;
+	}
+
+	@media (min-width: 1024px) {
+		width: 30%;
+	}
 `;
