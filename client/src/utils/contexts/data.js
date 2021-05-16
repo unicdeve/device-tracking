@@ -7,6 +7,7 @@ import React, {
 	useRef,
 } from 'react';
 import axios from 'axios';
+import setAuthToken from '../setAuthToken';
 
 // Context
 const DataContext = createContext();
@@ -24,6 +25,7 @@ function DataProvider(props) {
 
 	useEffect(() => {
 		if (userRef.current.token) {
+			setAuthToken(userRef.current.token);
 			setCurrentUser(userRef.current);
 			setScreen('home');
 		} else setScreen('auth');

@@ -1,12 +1,13 @@
 import React from 'react';
 import { useData } from '../../utils/contexts/data';
+import useToggleCheck from '../../utils/hooks/useToggleCheck';
 import CreateDeviceForm from '../create-device/create-device.comp';
 import { StyledHome } from './home.styled';
 
 export default function Home() {
 	const { data, dataLoading, currentUser } = useData();
 
-	console.log(data);
+	const { toggleChecked } = useToggleCheck();
 
 	return (
 		<StyledHome>
@@ -30,7 +31,17 @@ export default function Home() {
 								<p>{manufacturer}</p>
 								<p>{os}</p>
 								<p>{device}</p>
-								<p>Is checked out? {is_checked_out.toString()}</p>
+
+								<label htmlFor='is_checked_out'>Is checked out? </label>
+								<input
+									type='checkbox'
+									name='is_checked_out'
+									label='is_checked_out'
+									onChange={({ target: { checked } }) => {
+										toggleChecked(checked, id);
+									}}
+									defaultChecked={is_checked_out}
+								/>
 							</div>
 
 							{last_checked_out_by === currentUser.user_id ? (
