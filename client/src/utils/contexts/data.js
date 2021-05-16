@@ -1,12 +1,19 @@
-import { useEffect, useState } from 'react';
-
-import React, { createContext, useMemo, useContext } from 'react';
+import React, {
+	useEffect,
+	useState,
+	createContext,
+	useMemo,
+	useContext,
+} from 'react';
+import axios from 'axios';
 
 // Context
 const DataContext = createContext();
 
 function DataProvider(props) {
 	const [screen, setScreen] = useState('auth');
+	const [loading, setLoading] = useState(false);
+	const [data, setData] = useState([]);
 
 	let token = '';
 	if (localStorage.token) {
@@ -18,12 +25,27 @@ function DataProvider(props) {
 		else setScreen('auth');
 	}, [token]);
 
+	useEffect(() => {
+		axios
+			.get(`http://127.0.0.1:8000/device/`)
+			.then((res) => {
+				const data = res.data;
+				setData(data);
+			})
+			.catch((error) => {
+				setLoading(false);
+				console.error('Error: ');
+			});
+	}, []);
+
 	const value = useMemo(() => {
 		return {
 			screen,
 			setScreen,
+			data,
+			dataLoading: loading,
 		};
-	}, [screen]);
+	}, [screen, data, loading]);
 
 	return <DataContext.Provider value={value} {...props} />;
 }
