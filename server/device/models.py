@@ -11,6 +11,10 @@ class Device(models.Model):
         User, on_delete=models.SET_NULL, blank=True, null=True)
     is_checked_out = models.BooleanField(default=False)
     last_checked_out_date = models.DateTimeField(max_length=200, null=True, blank=True)
+    created_at = models.DateTimeField(auto_now_add=True)
 
     def __str__(self):
         return self.email
+
+    class Meta:
+        ordering = ("-created_at",)
