@@ -25,7 +25,7 @@ SECRET_KEY = 'qekrv6$sg!wu81xb14&gg@)hgr88j5m(ku_%+-5ck*b@2t)r@r'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['device-tracking-task.herokuapp.com', '0.0.0.0']
 
 
 # Application definition
