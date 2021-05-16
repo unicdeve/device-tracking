@@ -34,7 +34,6 @@ const useLogin = () => {
 						setLoading(false);
 						setAuthToken(token);
 
-						// TODO: show home screen
 						setScreen('home');
 					}
 				})
