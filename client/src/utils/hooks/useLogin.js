@@ -3,6 +3,7 @@ import axios from 'axios';
 import useForm from '../../utils/hooks/useForm';
 import { validateLoginData } from '../validations/login.validation';
 import setAuthToken from '../setAuthToken';
+import { useData } from '../contexts/data';
 
 const initialValues = {
 	email: '',
@@ -16,6 +17,8 @@ const useLogin = () => {
 		initialValues,
 		submitForm
 	);
+
+	const { setScreen } = useData();
 
 	function submitForm() {
 		const { isValid, errors } = validateLoginData(values);
@@ -32,6 +35,7 @@ const useLogin = () => {
 						setAuthToken(token);
 
 						// TODO: show home screen
+						setScreen('home');
 					}
 				})
 				.catch((error) => {

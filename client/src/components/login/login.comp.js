@@ -8,7 +8,7 @@ import { Container } from './login.styled';
 export default function LoginForm() {
 	const { values, handleChange, handleSubmit, errors, loading } = useLogin();
 
-	const { email, password, confirm_password } = values;
+	const { email, password } = values;
 
 	return (
 		<Container>
